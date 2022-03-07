@@ -23,7 +23,7 @@
         <jdk.version>1.8</jdk.version>
         <sourceEncoding>UTF-8</sourceEncoding>
         <mybatis.version>2.1.4</mybatis.version>
-        <mysql-connector.versin>5.1.34</mysql-connector.versin>
+        <mysql-connector.versin>8.0.22</mysql-connector.versin>
         <fastjson.version>1.2.78</fastjson.version>
         <lang3.version>3.8</lang3.version>
         <junit.version>4.12</junit.version>

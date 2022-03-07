@@ -30,10 +30,10 @@ hs_err_pid*
 out/
 
 # 编译后文件
-/target/
+target/
 
 # 环境配置文件
 *iml
 
-
-
+# docker 配置文件
+_env/
