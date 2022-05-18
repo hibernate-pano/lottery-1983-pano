@@ -4,6 +4,13 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.6.7</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
     <groupId>kit.pano</groupId>
     <artifactId>Lottery</artifactId>
     <packaging>pom</packaging>
@@ -16,13 +23,13 @@
         <module>lottery-interfaces</module>
         <module>lottery-rpc</module>
         <module>lottery-common</module>
+        <module>lottery-test</module>
     </modules>
 
     <properties>
         <!-- Base -->
         <jdk.version>1.8</jdk.version>
         <sourceEncoding>UTF-8</sourceEncoding>
-        <mybatis.version>2.1.4</mybatis.version>
         <mysql-connector.versin>8.0.22</mysql-connector.versin>
         <fastjson.version>1.2.78</fastjson.version>
         <lang3.version>3.8</lang3.version>
@@ -33,21 +40,16 @@
         <mapstruct.version>1.4.2.Final</mapstruct.version>
         <xxl-job.version>2.3.0</xxl-job.version>
         <db-router.version>1.0.1-SNAPSHOT</db-router.version>
+        <lombok.version>1.18.24</lombok.version>
+        <mybatis-plus.version>3.5.1</mybatis-plus.version>
     </properties>
-
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.6.0</version>
-        <relativePath/> <!-- lookup parent from repository -->
-    </parent>
 
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>org.mybatis.spring.boot</groupId>
-                <artifactId>mybatis-spring-boot-starter</artifactId>
-                <version>${mybatis.version}</version>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis-plus.version}</version>
             </dependency>
             <!-- # 多数据源路由配置
                  # mysql 5.x driver-class-name: com.mysql.jdbc.Driver    mysql-connector-java 5.1.34
@@ -128,6 +130,11 @@
                 <version>${db-router.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+            </dependency>
         </dependencies>
 
     </dependencyManagement>
