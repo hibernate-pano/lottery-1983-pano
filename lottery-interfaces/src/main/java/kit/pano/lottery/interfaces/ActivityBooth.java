@@ -4,8 +4,8 @@ import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import kit.pano.lottery.common.Constants;
 import kit.pano.lottery.common.Result;
-import kit.pano.lottery.infrastructure.domain.Activity;
 import kit.pano.lottery.infrastructure.mapper.ActivityMapper;
+import kit.pano.lottery.infrastructure.po.Activity;
 import kit.pano.lottery.rpc.IActivityBooth;
 import kit.pano.lottery.rpc.dto.ActivityDto;
 import kit.pano.lottery.rpc.req.ActivityReq;
@@ -15,11 +15,9 @@ import org.apache.dubbo.config.annotation.DubboService;
 import javax.annotation.Resource;
 
 /**
- * 博客：https://bugstack.cn - 沉淀、分享、成长，让自己和他人都能有所收获！
- * 公众号：bugstack虫洞栈
- * Create by 小傅哥(fustack)
- * <p>
  * 活动展台
+ *
+ * @author pano
  */
 @DubboService
 public class ActivityBooth implements IActivityBooth {

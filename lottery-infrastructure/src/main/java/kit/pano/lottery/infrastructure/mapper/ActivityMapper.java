@@ -1,6 +1,6 @@
 package kit.pano.lottery.infrastructure.mapper;
 
-import kit.pano.lottery.infrastructure.domain.Activity;
+import kit.pano.lottery.infrastructure.po.Activity;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
