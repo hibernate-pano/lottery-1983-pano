@@ -32,7 +32,7 @@ public class DrawBaseExecImpl extends AbstractDrawBase implements IDrawExec {
     @Override
     protected List<String> queryExcludeAwardIds(Long strategyId) {
         List<String> list = strategyRepository.queryNoStockStrategyAwardList(strategyId);
-        log.info("执行抽奖策略 strategyId：{}，无库存排除奖品列表ID集合 awardList：{}", strategyId, JSONUtil.toJsonPrettyStr(list));
+        log.info("执行抽奖策略 strategyId：{}，无库存排除奖品列表ID集合 awardList：{}", strategyId, JSONUtil.toJsonStr(list));
         return list;
     }
 

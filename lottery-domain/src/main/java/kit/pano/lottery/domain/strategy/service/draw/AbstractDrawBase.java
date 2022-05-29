@@ -70,11 +70,11 @@ public abstract class AbstractDrawBase extends DrawStrategySupport implements ID
     protected abstract String drawAlgorithm(Long strategyId, IDrawAlgorithm drawAlgorithm, List<String> excludeAwardIds);
 
     public void checkAndInitRateData(Long strategyId, Integer strategyMode, List<StrategyDetail> strategyDetailList) {
-        // 非单项概率，不必存入缓存
-        // todo 大概意思是不必重新计算概率么
-        if (!Constants.StrategyMode.SINGLE.getCode().equals(strategyMode)) {
-            return;
-        }
+//        // 非单项概率，不必存入缓存
+//        // todo 大概意思是不必重新计算概率么
+//        if (!Constants.StrategyMode.SINGLE.getCode().equals(strategyMode)) {
+//            return;
+//        }
         IDrawAlgorithm drawAlgorithm = drawAlgorithmGroup.get(strategyMode);
         // 判断该抽奖策略已初始化
         boolean existRateTuple = drawAlgorithm.isExistRateTuple(strategyId);
