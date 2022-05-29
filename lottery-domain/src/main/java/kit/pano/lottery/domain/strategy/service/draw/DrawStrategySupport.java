@@ -11,7 +11,7 @@ import javax.annotation.Resource;
  *
  * @author pano
  */
-public class DrawStrategySupport extends DrawInitConfig {
+public class DrawStrategySupport extends DrawConfig {
 
     @Resource
     protected IStrategyRepository strategyRepository;

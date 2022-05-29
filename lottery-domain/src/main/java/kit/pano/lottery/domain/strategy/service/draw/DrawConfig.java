@@ -14,7 +14,7 @@ import java.util.concurrent.ConcurrentHashMap;
  *
  * @author pano
  */
-public class DrawInitConfig {
+public class DrawConfig {
 
     /**
      * 抽奖策略组
