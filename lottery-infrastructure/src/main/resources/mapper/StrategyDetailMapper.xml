@@ -16,4 +16,13 @@
         <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
     </resultMap>
 
+    <!--    扣除库存-->
+    <update id="deductStock">
+        update lottery.strategy_detail
+        set award_surplus_count = award_surplus_count - 1
+        where strategy_id = #{strategyId}
+          and award_id = #{awardId}
+          and award_surplus_count > 0
+    </update>
+
 </mapper>

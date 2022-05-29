@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author pano
@@ -64,5 +65,35 @@ public class StrategyRepository implements IStrategyRepository {
                 new LambdaQueryWrapper<Award>()
                         .eq(Award::getAwardId, awardId)
         );
+    }
+
+    /**
+     * 查询没有库存的奖品信息IDs
+     *
+     * @param strategyId 抽奖策略ID
+     * @return 奖品IDs
+     */
+    @Override
+    public List<String> queryNoStockStrategyAwardList(Long strategyId) {
+        // 查询指定策略中，无库存的奖品ID集合
+        List<StrategyDetail> detailList = strategyDetailMapper.selectList(
+                new LambdaQueryWrapper<StrategyDetail>()
+                        .eq(StrategyDetail::getStrategyId, strategyId)
+                        .eq(StrategyDetail::getAwardSurplusCount, 0)
+        );
+        return detailList.stream().map(StrategyDetail::getAwardId).distinct().collect(Collectors.toList());
+    }
+
+    /**
+     * 扣减库存
+     *
+     * @param strategyId 策略ID
+     * @param awardId    奖品ID
+     * @return 扣减结果
+     */
+    @Override
+    public boolean deductStock(Long strategyId, String awardId) {
+        int count = strategyDetailMapper.deductStock(strategyId, awardId);
+        return 1 == count;
     }
 }

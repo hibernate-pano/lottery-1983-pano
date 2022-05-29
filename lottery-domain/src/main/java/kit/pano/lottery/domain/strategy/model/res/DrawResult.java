@@ -1,8 +1,8 @@
 package kit.pano.lottery.domain.strategy.model.res;
 
-import lombok.AllArgsConstructor;
+import kit.pano.lottery.common.Constants;
+import kit.pano.lottery.domain.strategy.model.vo.DrawAwardInfo;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 /**
  * 抽奖response对象
@@ -10,8 +10,6 @@ import lombok.NoArgsConstructor;
  * @author pano
  */
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class DrawResult {
 
     /**
@@ -33,4 +31,30 @@ public class DrawResult {
      * 奖品名称
      */
     private String awardName;
+
+    /**
+     * 中奖奖品信息
+     */
+    private DrawAwardInfo drawAwardInfo;
+
+    /**
+     * 中奖状态：0未中奖、1已中奖、2兜底奖 Constants.DrawState
+     */
+    private Integer drawState = Constants.DrawState.FAIL.getCode();
+
+    public DrawResult() {
+    }
+
+    public DrawResult(String uId, Long strategyId, Integer drawState) {
+        this.uId = uId;
+        this.strategyId = strategyId;
+        this.drawState = drawState;
+    }
+
+    public DrawResult(String uId, Long strategyId, Integer drawState, DrawAwardInfo drawAwardInfo) {
+        this.uId = uId;
+        this.strategyId = strategyId;
+        this.drawAwardInfo = drawAwardInfo;
+        this.drawState = drawState;
+    }
 }

@@ -3,7 +3,6 @@ package kit.pano.lottery.domain.strategy.service.algorithm.impl;
 import kit.pano.lottery.domain.strategy.service.algorithm.BaseDrawAlgorithm;
 import org.springframework.stereotype.Component;
 
-import java.security.SecureRandom;
 import java.util.List;
 
 /**
@@ -27,12 +26,12 @@ public class SingleRateRandomDrawAlgorithm extends BaseDrawAlgorithm {
         String[] rateTuple = super.rateTupleMap.get(strategyId);
         assert rateTuple != null;
         // 随机索引
-        int randomVal = new SecureRandom().nextInt(100) + 1;
+        int randomVal = super.generateSecureRandomIntCode(100);
         int idx = super.hashIdx(randomVal);
         // 返回结果
         String awardId = rateTuple[idx];
         if (excludeAwardIds.contains(awardId)) {
-            return "";
+            return null;
         }
         return awardId;
     }

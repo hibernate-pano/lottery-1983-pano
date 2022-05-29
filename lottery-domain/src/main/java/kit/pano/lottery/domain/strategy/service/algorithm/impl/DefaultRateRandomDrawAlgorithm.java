@@ -6,7 +6,6 @@ import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,19 +41,19 @@ public class DefaultRateRandomDrawAlgorithm extends BaseDrawAlgorithm {
             differenceDenominator = differenceDenominator.add(awardRateInfo.getAwardRate());
         }
         // 前置判断
-        // 当所有奖品都被抽完后，返回空
+        // 当所有奖品都被抽完后，返回 null
         if (differenceAwardRateList.size() == 0) {
-            return "";
+            return null;
         }
         // 当只剩最后一个奖品时，直接返回该奖品ID
         if (differenceAwardRateList.size() == 1) {
             return differenceAwardRateList.get(0).getAwardId();
         }
         // 获取随机概率值
-        SecureRandom secureRandom = new SecureRandom();
-        int randomVal = secureRandom.nextInt(100) + 1;
+        int randomVal = super.generateSecureRandomIntCode(100);
+
         // 循环获取奖品
-        String awardId = "";
+        String awardId = null;
         int cursorVal = 0;
         for (AwardRateInfo awardRateInfo : differenceAwardRateList) {
             int rateVal = awardRateInfo.getAwardRate()
