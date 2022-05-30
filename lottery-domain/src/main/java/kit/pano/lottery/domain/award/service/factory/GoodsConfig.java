@@ -3,7 +3,7 @@ package kit.pano.lottery.domain.award.service.factory;
 import kit.pano.lottery.common.Constants;
 import kit.pano.lottery.domain.award.service.goods.IDistributionGoods;
 import kit.pano.lottery.domain.award.service.goods.impl.CouponGoods;
-import kit.pano.lottery.domain.award.service.goods.impl.DescGoods;
+import kit.pano.lottery.domain.award.service.goods.impl.DescriptionGoods;
 import kit.pano.lottery.domain.award.service.goods.impl.PhysicalGoods;
 import kit.pano.lottery.domain.award.service.goods.impl.RedeemCodeGoods;
 
@@ -27,7 +27,7 @@ public class GoodsConfig {
     protected static Map<Integer, IDistributionGoods> goodsMap = new ConcurrentHashMap<>();
 
     @Resource
-    private DescGoods descGoods;
+    private DescriptionGoods descriptionGoods;
 
     @Resource
     private RedeemCodeGoods redeemCodeGoods;
@@ -44,7 +44,7 @@ public class GoodsConfig {
      */
     @PostConstruct
     public void init() {
-        goodsMap.put(Constants.AwardType.DescriptionGoods.getCode(), descGoods);
+        goodsMap.put(Constants.AwardType.DescriptionGoods.getCode(), descriptionGoods);
         goodsMap.put(Constants.AwardType.RedeemCodeGoods.getCode(), redeemCodeGoods);
         goodsMap.put(Constants.AwardType.CouponGoods.getCode(), couponGoods);
         goodsMap.put(Constants.AwardType.PhysicalGoods.getCode(), physicalGoods);

@@ -9,7 +9,7 @@ import kit.pano.lottery.domain.award.service.goods.IDistributionGoods;
  * @author pano
  * @date 2022/5/29
  **/
-public class DescGoods extends DistributionBase implements IDistributionGoods {
+public class DescriptionGoods extends DistributionBase implements IDistributionGoods {
 
     /**
      * 奖品配送接口，奖品类型（1:文字描述、2:兑换码、3:优惠券、4:实物奖品）
