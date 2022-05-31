@@ -1,14 +1,19 @@
 package kit.pano.lottery.domain.award.service.goods.impl;
 
+import kit.pano.lottery.common.Constants;
 import kit.pano.lottery.domain.award.model.req.GoodsReq;
 import kit.pano.lottery.domain.award.model.res.DistributionRes;
 import kit.pano.lottery.domain.award.service.goods.DistributionBase;
 import kit.pano.lottery.domain.award.service.goods.IDistributionGoods;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 
 /**
  * @author pano
  * @date 2022/5/29
  **/
+@Slf4j
+@Component
 public class DescriptionGoods extends DistributionBase implements IDistributionGoods {
 
     /**
@@ -19,6 +24,19 @@ public class DescriptionGoods extends DistributionBase implements IDistributionG
      */
     @Override
     public DistributionRes doDistribution(GoodsReq req) {
-        return null;
+        // 更新用户领奖结果
+        super.updateUserAwardState(req.getUId(), req.getOrderId(), req.getAwardId(), Constants.AwardState.SUCCESS.getCode(), Constants.AwardState.SUCCESS.getInfo());
+        // 返回结果
+        return new DistributionRes(req.getUId(), Constants.AwardState.SUCCESS.getCode(), Constants.AwardState.SUCCESS.getInfo());
+    }
+
+    /**
+     * 获取配送奖品名称
+     *
+     * @return 奖品名称
+     */
+    @Override
+    public Integer getDistributionGoodsName() {
+        return Constants.AwardType.DescriptionGoods.getCode();
     }
 }
