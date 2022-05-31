@@ -5,12 +5,8 @@ import kit.pano.lottery.common.Constants;
 import kit.pano.lottery.domain.strategy.model.aggregates.StrategyRich;
 import kit.pano.lottery.domain.strategy.model.req.DrawReq;
 import kit.pano.lottery.domain.strategy.model.res.DrawResult;
-import kit.pano.lottery.domain.strategy.model.vo.AwardRateInfo;
-import kit.pano.lottery.domain.strategy.model.vo.DrawAwardInfo;
+import kit.pano.lottery.domain.strategy.model.vo.*;
 import kit.pano.lottery.domain.strategy.service.algorithm.IDrawAlgorithm;
-import kit.pano.lottery.infrastructure.po.Award;
-import kit.pano.lottery.infrastructure.po.Strategy;
-import kit.pano.lottery.infrastructure.po.StrategyDetail;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
@@ -35,7 +31,7 @@ public abstract class AbstractDrawBase extends DrawStrategySupport implements ID
 
         // 1. 获取抽奖策略
         StrategyRich strategyRich = super.queryStrategyRich(req.getStrategyId());
-        Strategy strategy = strategyRich.getStrategy();
+        StrategyBriefVO strategy = strategyRich.getStrategy();
 
         // 2. 校验抽奖策略是否已经初始化到内存
         checkAndInitRateData(req.getStrategyId(), strategy.getStrategyMode(), strategyRich.getStrategyDetailList());
@@ -69,7 +65,7 @@ public abstract class AbstractDrawBase extends DrawStrategySupport implements ID
      */
     protected abstract String drawAlgorithm(Long strategyId, IDrawAlgorithm drawAlgorithm, List<String> excludeAwardIds);
 
-    public void checkAndInitRateData(Long strategyId, Integer strategyMode, List<StrategyDetail> strategyDetailList) {
+    public void checkAndInitRateData(Long strategyId, Integer strategyMode, List<StrategyDetailBriefVO> strategyDetailList) {
 //        // 非单项概率，不必存入缓存
 //        // todo 大概意思是不必重新计算概率么
 //        if (!Constants.StrategyMode.SINGLE.getCode().equals(strategyMode)) {
@@ -82,7 +78,7 @@ public abstract class AbstractDrawBase extends DrawStrategySupport implements ID
             return;
         }
         List<AwardRateInfo> awardRateInfoList = new ArrayList<>(strategyDetailList.size());
-        for (StrategyDetail strategyDetail : strategyDetailList) {
+        for (StrategyDetailBriefVO strategyDetail : strategyDetailList) {
             awardRateInfoList.add(new AwardRateInfo(strategyDetail.getAwardId(), strategyDetail.getAwardRate()));
         }
         drawAlgorithm.initRateTuple(strategyId, awardRateInfoList);
@@ -102,7 +98,7 @@ public abstract class AbstractDrawBase extends DrawStrategySupport implements ID
             return new DrawResult(uId, strategyId, Constants.DrawState.FAIL.getCode());
         }
 
-        Award award = super.queryAwardInfoByAwardId(awardId);
+        AwardBriefVO award = super.queryAwardInfoByAwardId(awardId);
         DrawAwardInfo drawAwardInfo = new DrawAwardInfo(award.getAwardId(), award.getAwardName());
         log.info("执行策略抽奖完成【已中奖】，用户：{} 策略ID：{} 奖品ID：{} 奖品名称：{}", uId, strategyId, awardId, award.getAwardName());
 

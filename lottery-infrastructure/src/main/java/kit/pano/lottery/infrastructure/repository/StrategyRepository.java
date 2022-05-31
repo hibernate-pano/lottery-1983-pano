@@ -1,7 +1,11 @@
-package kit.pano.lottery.domain.strategy.repository.impl;
+package kit.pano.lottery.infrastructure.repository;
 
+import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import kit.pano.lottery.domain.strategy.model.aggregates.StrategyRich;
+import kit.pano.lottery.domain.strategy.model.vo.AwardBriefVO;
+import kit.pano.lottery.domain.strategy.model.vo.StrategyBriefVO;
+import kit.pano.lottery.domain.strategy.model.vo.StrategyDetailBriefVO;
 import kit.pano.lottery.domain.strategy.repository.IStrategyRepository;
 import kit.pano.lottery.infrastructure.mapper.AwardMapper;
 import kit.pano.lottery.infrastructure.mapper.StrategyDetailMapper;
@@ -12,6 +16,7 @@ import kit.pano.lottery.infrastructure.po.StrategyDetail;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -44,13 +49,17 @@ public class StrategyRepository implements IStrategyRepository {
                 new LambdaQueryWrapper<Strategy>()
                         .eq(Strategy::getStrategyId, strategyId)
         );
+        StrategyBriefVO strategyBriefVO = new StrategyBriefVO();
+        BeanUtil.copyProperties(strategy, strategyBriefVO);
         // 获取策略详情
         List<StrategyDetail> strategyDetailList = strategyDetailMapper.selectList(
                 new LambdaQueryWrapper<StrategyDetail>()
                         .eq(StrategyDetail::getStrategyId, strategyId)
         );
+        List<StrategyDetailBriefVO> strategyDetailBriefVOList = new ArrayList<>();
+        BeanUtil.copyProperties(strategyDetailList, strategyDetailBriefVOList);
         // 返回结果
-        return new StrategyRich(strategyId, strategy, strategyDetailList);
+        return new StrategyRich(strategyId, strategyBriefVO, strategyDetailBriefVOList);
     }
 
     /**
@@ -60,11 +69,14 @@ public class StrategyRepository implements IStrategyRepository {
      * @return 奖品 Award 对象
      */
     @Override
-    public Award queryAwardInfo(String awardId) {
-        return awardMapper.selectOne(
+    public AwardBriefVO queryAwardInfo(String awardId) {
+        Award award = awardMapper.selectOne(
                 new LambdaQueryWrapper<Award>()
                         .eq(Award::getAwardId, awardId)
         );
+        AwardBriefVO vo = new AwardBriefVO();
+        BeanUtil.copyProperties(award, vo);
+        return vo;
     }
 
     /**

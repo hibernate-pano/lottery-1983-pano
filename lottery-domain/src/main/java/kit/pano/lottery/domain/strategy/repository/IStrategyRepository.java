@@ -1,7 +1,7 @@
 package kit.pano.lottery.domain.strategy.repository;
 
 import kit.pano.lottery.domain.strategy.model.aggregates.StrategyRich;
-import kit.pano.lottery.infrastructure.po.Award;
+import kit.pano.lottery.domain.strategy.model.vo.AwardBriefVO;
 
 import java.util.List;
 
@@ -25,7 +25,7 @@ public interface IStrategyRepository {
      * @param awardId 奖品ID
      * @return 奖品 Award 对象
      */
-    Award queryAwardInfo(String awardId);
+    AwardBriefVO queryAwardInfo(String awardId);
 
     /**
      * 查询没有库存的奖品信息IDs

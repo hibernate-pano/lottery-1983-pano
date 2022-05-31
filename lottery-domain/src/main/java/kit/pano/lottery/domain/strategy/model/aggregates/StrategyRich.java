@@ -1,8 +1,8 @@
 package kit.pano.lottery.domain.strategy.model.aggregates;
 
 
-import kit.pano.lottery.infrastructure.po.Strategy;
-import kit.pano.lottery.infrastructure.po.StrategyDetail;
+import kit.pano.lottery.domain.strategy.model.vo.StrategyBriefVO;
+import kit.pano.lottery.domain.strategy.model.vo.StrategyDetailBriefVO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -22,9 +22,9 @@ public class StrategyRich {
     /**
      * 策略配置
      */
-    private Strategy strategy;
+    private StrategyBriefVO strategy;
     /**
      * 策略明细
      */
-    private List<StrategyDetail> strategyDetailList;
+    private List<StrategyDetailBriefVO> strategyDetailList;
 }
