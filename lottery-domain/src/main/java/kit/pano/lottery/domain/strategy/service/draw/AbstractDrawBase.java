@@ -28,7 +28,6 @@ public abstract class AbstractDrawBase extends DrawStrategySupport implements ID
      */
     @Override
     public DrawResult doDrawExec(DrawReq req) {
-
         // 1. 获取抽奖策略
         StrategyRich strategyRich = super.queryStrategyRich(req.getStrategyId());
         StrategyBriefVO strategy = strategyRich.getStrategy();

@@ -93,7 +93,7 @@ public class Constants {
         /**
          * 兜底奖
          */
-        Cover(2, "兜底奖");
+        COVER(2, "兜底奖");
 
         private Integer code;
         private String info;
